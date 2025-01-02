@@ -71,7 +71,7 @@
     // Citation patterns for different styles
     const citationPatterns = {
         harvard: {
-            pattern: /\([^,]+,\s*\d{4}[^)]*\)/g,
+            pattern: /\((?:[^()]*\([^()]*\)[^()]*|[^(),])*,\s*\d{4}[^)]*\)/g,
             example: "Example: (Smith, 2020) or (Smith et al., 2019)"
         },
         apa: {
