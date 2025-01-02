@@ -1,24 +1,8 @@
----
-page_type: sample
-urlFragment: word-add-in-citation-word-counter
-products:
-  - office-word
-  - office
-languages:
-  - javascript
-extensions:
-  contentType: samples
-  technologies:
-    - Add-ins
-  createdDate: '2024-03-19'
-description: 'Create a Word Add-in that counts words while intelligently handling citations.'
----
-
-# Create a Word Add-in for Citation-Aware Word Counting
+# Word Add-in for Citation-Aware Word Counting
 
 ## Summary
 
-Learn how to build a Word Add-in that provides accurate word counts while intelligently handling academic citations. This tool supports multiple citation styles and helps authors get accurate word counts for academic writing.
+Word Add-in that provides accurate word counts while intelligently handling academic citations. This tool supports multiple citation styles and helps authors get accurate word counts for academic writing.
 
 ## Features
 
@@ -44,18 +28,6 @@ Learn how to build a Word Add-in that provides accurate word counts while intell
 ## Prerequisites
 
 - Microsoft 365
-
-## Solution
-
-Solution | Author(s)
----------|----------
-Word Citation Counter | Your Name
-
-## Version history
-
-Version  | Date | Comments
----------| -----| --------
-1.0  | March 19, 2024 | Initial release
 
 ## Usage
 
