@@ -29,6 +29,44 @@ Word Add-in that provides accurate word counts while intelligently handling acad
 
 - Microsoft 365
 
+## Installation
+
+1. Download the latest release:
+   - Go to the [Releases](https://github.com/danbamber/accurate-word-count) page
+   - Download the latest version (.zip file)
+   - Extract the files to your preferred location
+
+2. Install in Word:
+
+   **For Web Version (Office Online):**
+   - Open Word Online (www.office.com)
+   - Open any document
+   - Click Home > Add-ins > More Add-ins > My Add-ins
+   - Choose "Upload My Add-in"
+   - Browse to the manifest.xml file in your extracted folder
+   - Click "Install"
+   
+   **For Windows:**
+   - Open Word
+   - Go to File > Options > Trust Center > Trust Center Settings
+   - Select "Trusted App Catalogs"
+   - Click "Add new catalog"
+   - In the "Catalog Url" field, enter the file path where your manifest.xml is located
+     (e.g., `\\MyComputer\Downloads\citation-counter\manifest.xml`)
+   - Click OK
+   - Check the "Show in Menu" checkbox
+   - Click OK and restart Word
+   - Go to Insert > My Add-ins > Shared Folder
+   - Select "Citation-Aware Word Counter"
+
+   **For Mac:**
+   - Open Word
+   - Go to Insert > Add-ins > My Add-ins
+   - Click on the dropdown menu and select "Manage My Add-ins"
+   - Choose "Upload My Add-in"
+   - Browse to the manifest.xml file in your extracted folder
+   - Click "Install"
+
 ## Usage
 
 1. Select your citation style from the dropdown menu
@@ -53,10 +91,10 @@ This add-in is particularly useful for:
 - Researchers preparing manuscripts
 - Editors reviewing academic content
 
-## Solution Components
+## License
 
-The add-in consists of:
-- A task pane interface for user interaction
-- Citation pattern detection for multiple styles
-- Word counting logic that can exclude citations
-- Real-time document analysis
+This project is released into the public domain under the Unlicense:
+
+This is free and unencumbered software released into the public domain. Anyone is free to copy, modify, publish, use, compile, sell, or distribute this software, either in source code form or as a compiled binary, for any purpose, commercial or non-commercial, and by any means.
+
+For more information, please refer to <http://unlicense.org/>
