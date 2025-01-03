@@ -67,14 +67,27 @@ Word Add-in that provides accurate word counts while intelligently handling acad
    - Browse to the manifest.xml file in your extracted folder
    - Click "Install"
 
+**Direct Web Browser Usage:**
+- Visit [https://danbamber.github.io/accurate-word-count/taskpane.html](https://danbamber.github.io/accurate-word-count/taskpane.html)
+- No installation required - simply paste your text and analyze citations directly in your browser
+- Perfect for quick checks or when Word installation isn't available
+
 ## Usage
 
-1. Select your citation style from the dropdown menu
-2. Click "Count Words" to analyze your document
-3. View the results showing:
-   - Total word count
-   - Word count excluding citations
-   - Number of citations found
+1. **In Microsoft Word:**
+   - Select your citation style from the dropdown menu
+   - Click "Count Words" to analyze your document
+   - View the results showing:
+     - Total word count
+     - Word count excluding citations
+     - Number of citations found
+
+2. **In Web Browser:**
+   - Visit the web version
+   - Paste your text into the input area
+   - Select your citation style
+   - Click "Count Words" to analyze
+   - Results will show the same metrics as the Word version
 
 ## Key Functions
 
