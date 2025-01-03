@@ -56,12 +56,12 @@ Word Add-in that provides accurate word counts while intelligently handling acad
    - Click OK
    - Check the "Show in Menu" checkbox
    - Click OK and restart Word
-   - Go to Insert > My Add-ins > Shared Folder
+   - Go to Home > My Add-ins > Shared Folder
    - Select "Citation-Aware Word Counter"
 
    **For Mac:**
    - Open Word
-   - Go to Insert > Add-ins > My Add-ins
+   - Go to Home > Add-ins > My Add-ins
    - Click on the dropdown menu and select "Manage My Add-ins"
    - Choose "Upload My Add-in"
    - Browse to the manifest.xml file in your extracted folder
