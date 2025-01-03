@@ -1,11 +1,15 @@
-<!-- Copyright (c) Microsoft Corporation. All rights reserved. Licensed under the MIT License. -->
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Count Tool</title>
     <!-- Office JavaScript API -->
     <script type="text/javascript" src="https://appsforoffice.microsoft.com/lib/1/hosted/office.js"></script>
     <style>
+        body {
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+        }
         .container {
             padding: 15px;
         }
@@ -45,7 +49,6 @@
 
 <body>
     <div class="container">
-        <h2>Word Count Tool</h2>
         <p>Count words in your document while ignoring citations.</p>
         
         <select id="citationStyle">
@@ -65,92 +68,90 @@
             <p>Citations found: <span id="citationCount">0</span></p>
         </div>
     </div>
+    <script>
+        // Citation patterns for different styles
+        const citationPatterns = {
+            harvard: {
+                pattern: /\s*\((?:[^()]*\([^()]*\)[^()]*|[^(),])*,\s*\d{4}[^)]*\)/g,
+                example: "Example: (Smith, 2020) or (Office for National Statistics (ONS), 2018)"
+            },
+            apa: {
+                pattern: /\s*\([^)]+\d{4}[^)]*\)|\s*\b[A-Za-z-]+\s+(?:et\s+al\.)?\s*\([^)]+\d{4}[^)]*\)/g,
+                example: "Example: (Smith, 2020) or Smith et al. (2019)"
+            },
+            mla: {
+                pattern: /\s*\([^)]+\d+(?:-\d+)?[^)]*\)|\s*\b[A-Za-z-]+\s+\d+(?:-\d+)?/g,
+                example: "Example: (Smith 123) or Smith 123-125"
+            },
+            chicago: {
+                pattern: /\s*\((?:[^)]+,\s*)?\d{4}[^)]*\)|\s*\b\d+\.\s+[^.]+\./g,
+                example: "Example: (Smith 2020) or (2020) or 1. Author note."
+            },
+            vancouver: {
+                pattern: /\s*\[\d+(?:-\d+)?(?:,\s*\d+)*\]/g,
+                example: "Example: [1] or [1-3] or [1,3,5]"
+            }
+        };
+    
+        Office.onReady((info) => {
+            if (info.host === Office.HostType.Word) {
+                document.getElementById("countButton").onclick = countWords;
+                const styleSelect = document.getElementById("citationStyle");
+                styleSelect.onchange = updateCitationExample;
+                updateCitationExample(); // Show initial example
+            }
+        });
+    
+        function updateCitationExample() {
+            const style = document.getElementById("citationStyle").value;
+            document.getElementById("citationExample").textContent = 
+                citationPatterns[style].example;
+        }
+    
+        async function countWords() {
+            try {
+                await Word.run(async (context) => {
+                    // Get the complete document text
+                    const documentBody = context.document.body;
+                    documentBody.load("text");
+                    await context.sync();
+    
+                    let text = documentBody.text;
+                    
+                    // Get selected citation style pattern
+                    const style = document.getElementById("citationStyle").value;
+                    const citationRegex = citationPatterns[style].pattern;
+                    
+                    // Find all citations
+                    const citations = text.match(citationRegex) || [];
+                    
+                    // Count words with citations
+                    const totalWordCount = countWordsInText(text);
+                    
+                    // Remove citations and count words
+                    const textWithoutCitations = text.replace(citationRegex, '');
+                    const wordCountExcludingCitations = countWordsInText(textWithoutCitations);
+    
+                    // Update the UI
+                    document.getElementById("totalCount").textContent = totalWordCount;
+                    document.getElementById("excludedCount").textContent = wordCountExcludingCitations;
+                    document.getElementById("citationCount").textContent = citations.length;
+    
+                    // Optional: Log found citations for debugging
+                    console.log('Found citations:', citations);
+                });
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        }
+    
+        function countWordsInText(text) {
+            return text.trim()
+                .replace(/\s+/g, ' ')
+                .split(' ')
+                .filter(word => word.length > 0)
+                .length;
+        }
+    </script>
 </body>
-
-<script>
-    // Citation patterns for different styles
-    const citationPatterns = {
-        harvard: {
-            pattern: /\s*\((?:[^()]*\([^()]*\)[^()]*|[^(),])*,\s*\d{4}[^)]*\)/g,
-            example: "Example: (Smith, 2020) or (Office for National Statistics (ONS), 2018)"
-        },
-        apa: {
-            pattern: /\s*\([^)]+\d{4}[^)]*\)|\s*\b[A-Za-z-]+\s+(?:et\s+al\.)?\s*\([^)]+\d{4}[^)]*\)/g,
-            example: "Example: (Smith, 2020) or Smith et al. (2019)"
-        },
-        mla: {
-            pattern: /\s*\([^)]+\d+(?:-\d+)?[^)]*\)|\s*\b[A-Za-z-]+\s+\d+(?:-\d+)?/g,
-            example: "Example: (Smith 123) or Smith 123-125"
-        },
-        chicago: {
-            pattern: /\s*\((?:[^)]+,\s*)?\d{4}[^)]*\)|\s*\b\d+\.\s+[^.]+\./g,
-            example: "Example: (Smith 2020) or (2020) or 1. Author note."
-        },
-        vancouver: {
-            pattern: /\s*\[\d+(?:-\d+)?(?:,\s*\d+)*\]/g,
-            example: "Example: [1] or [1-3] or [1,3,5]"
-        }
-    };
-
-    Office.onReady((info) => {
-        if (info.host === Office.HostType.Word) {
-            document.getElementById("countButton").onclick = countWords;
-            const styleSelect = document.getElementById("citationStyle");
-            styleSelect.onchange = updateCitationExample;
-            updateCitationExample(); // Show initial example
-        }
-    });
-
-    function updateCitationExample() {
-        const style = document.getElementById("citationStyle").value;
-        document.getElementById("citationExample").textContent = 
-            citationPatterns[style].example;
-    }
-
-    async function countWords() {
-        try {
-            await Word.run(async (context) => {
-                // Get the complete document text
-                const documentBody = context.document.body;
-                documentBody.load("text");
-                await context.sync();
-
-                let text = documentBody.text;
-                
-                // Get selected citation style pattern
-                const style = document.getElementById("citationStyle").value;
-                const citationRegex = citationPatterns[style].pattern;
-                
-                // Find all citations
-                const citations = text.match(citationRegex) || [];
-                
-                // Count words with citations
-                const totalWordCount = countWordsInText(text);
-                
-                // Remove citations and count words
-                const textWithoutCitations = text.replace(citationRegex, '');
-                const wordCountExcludingCitations = countWordsInText(textWithoutCitations);
-
-                // Update the UI
-                document.getElementById("totalCount").textContent = totalWordCount;
-                document.getElementById("excludedCount").textContent = wordCountExcludingCitations;
-                document.getElementById("citationCount").textContent = citations.length;
-
-                // Optional: Log found citations for debugging
-                console.log('Found citations:', citations);
-            });
-        } catch (error) {
-            console.error('Error:', error);
-        }
-    }
-
-    function countWordsInText(text) {
-        return text.trim()
-            .replace(/\s+/g, ' ')
-            .split(' ')
-            .filter(word => word.length > 0)
-            .length;
-    }
-</script>
-
 </html>
