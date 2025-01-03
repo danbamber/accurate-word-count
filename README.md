@@ -32,7 +32,7 @@ Word Add-in that provides accurate word counts while intelligently handling acad
 ## Installation
 
 1. Download the latest release:
-   - Go to the [Releases](https://github.com/danbamber/accurate-word-count) page
+   - Go to the [Releases](https://github.com/danbamber/accurate-word-count/releases) page
    - Download the latest version (.zip file)
    - Extract the files to your preferred location
 
