@@ -2,22 +2,33 @@
 <OfficeApp xmlns="http://schemas.microsoft.com/office/appforoffice/1.1"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xmlns:bt="http://schemas.microsoft.com/office/officeappbasictypes/1.0"
-  xmlns:ov="http://schemas.microsoft.com/office/taskpaneappversionoverrides" xsi:type="TaskPaneApp">
+  xsi:type="TaskPaneApp">
   <Id>B7E70C9D-4285-4E56-AE22-F6640E973569</Id>
-  <Version>1.0.0.0</Version>
+  <Version>1.0.0</Version>
   <ProviderName>danbamber</ProviderName>
   <DefaultLocale>en-US</DefaultLocale>
   <DisplayName DefaultValue="Word Count Tool"/>
   <Description DefaultValue="Count words while ignoring citations"/>
   <IconUrl DefaultValue="https://danbamber.github.io/accurate-word-count/assets/icon-32.png"/>
   <HighResolutionIconUrl DefaultValue="https://danbamber.github.io/accurate-word-count/assets/icon-64.png"/>
+  <Icon>
+    <bt:Image size="16" DefaultValue="https://danbamber.github.io/accurate-word-count/assets/icon-16.png"/>
+    <bt:Image size="32" DefaultValue="https://danbamber.github.io/accurate-word-count/assets/icon-32.png"/>
+    <bt:Image size="64" DefaultValue="https://danbamber.github.io/accurate-word-count/assets/icon-64.png"/>
+    <bt:Image size="80" DefaultValue="https://danbamber.github.io/accurate-word-count/assets/icon-80.png"/>
+  </Icon>
   <SupportUrl DefaultValue="https://danbamber.github.io/accurate-word-count"/>
   <AppDomains>
-    <AppDomain>https://danbamber.github.io/accurate-word-count</AppDomain>
+    <AppDomain>danbamber.github.io</AppDomain>
   </AppDomains>
   <Hosts>
     <Host Name="Document"/>
   </Hosts>
+  <Requirements>
+    <Sets>
+      <Set Name="WordApi" MinVersion="1.1"/>
+    </Sets>
+  </Requirements>
   <DefaultSettings>
     <SourceLocation DefaultValue="https://danbamber.github.io/accurate-word-count/taskpane.html"/>
   </DefaultSettings>
@@ -26,15 +37,10 @@
     <Hosts>
       <Host xsi:type="Document">
         <DesktopFormFactor>
-          <GetStarted>
-            <Title resid="GetStarted.Title"/>
-            <Description resid="GetStarted.Description"/>
-            <LearnMoreUrl resid="GetStarted.LearnMoreUrl"/>
-          </GetStarted>
           <ExtensionPoint xsi:type="PrimaryCommandSurface">
             <OfficeTab id="TabHome">
-              <Group id="CommandsGroup">
-                <Label resid="CommandsGroup.Label"/>
+              <Group id="WordCountGroup">
+                <Label resid="WordCountGroup.Label"/>
                 <Icon>
                   <bt:Image size="16" resid="Icon.16x16"/>
                   <bt:Image size="32" resid="Icon.32x32"/>
@@ -43,8 +49,8 @@
                 <Control xsi:type="Button" id="TaskpaneButton">
                   <Label resid="TaskpaneButton.Label"/>
                   <Supertip>
-                    <Title resid="TaskpaneButton.SupertipTitle"/>
-                    <Description resid="TaskpaneButton.SupertipText"/>
+                    <Title resid="TaskpaneButton.Label"/>
+                    <Description resid="TaskpaneButton.Tooltip"/>
                   </Supertip>
                   <Icon>
                     <bt:Image size="16" resid="Icon.16x16"/>
@@ -69,18 +75,14 @@
         <bt:Image id="Icon.80x80" DefaultValue="https://danbamber.github.io/accurate-word-count/assets/icon-80.png"/>
       </bt:Images>
       <bt:Urls>
-        <bt:Url id="GetStarted.LearnMoreUrl" DefaultValue="http://go.microsoft.com/fwlink/?LinkId=276812"/>
         <bt:Url id="Taskpane.Url" DefaultValue="https://danbamber.github.io/accurate-word-count/taskpane.html"/>
       </bt:Urls>
       <bt:ShortStrings>
-        <bt:String id="GetStarted.Title" DefaultValue="Get started with the Word Count add-in!"/>
-        <bt:String id="CommandsGroup.Label" DefaultValue="Count Add-in"/>
-        <bt:String id="TaskpaneButton.Label" DefaultValue="Word Count"/>
-        <bt:String id="TaskpaneButton.SupertipTitle" DefaultValue="Word Count"/>
+        <bt:String id="WordCountGroup.Label" DefaultValue="Word Count"/>
+        <bt:String id="TaskpaneButton.Label" DefaultValue="Count Words"/>
       </bt:ShortStrings>
       <bt:LongStrings>
-        <bt:String id="GetStarted.Description" DefaultValue="Your sample add-in loaded successfully. Go to the HOME tab and click the 'Word Count' button to get started."/>
-        <bt:String id="TaskpaneButton.SupertipText" DefaultValue="Count words while ignoring citations"/>
+        <bt:String id="TaskpaneButton.Tooltip" DefaultValue="Count words while ignoring citations"/>
       </bt:LongStrings>
     </Resources>
   </VersionOverrides>
