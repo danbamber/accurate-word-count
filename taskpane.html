@@ -51,6 +51,14 @@
     <div class="container">
         <p>Count words in your document while ignoring citations.</p>
         
+        <div id="webInput" style="display: none;">
+            <p>Paste your text here:</p>
+            <div style="display: flex; gap: 10px; margin: 10px 0;">
+                <textarea id="textInput" rows="10" style="flex: 1; padding: 8px;"></textarea>
+                <button id="pasteButton" style="height: 40px;">📋 Paste</button>
+            </div>
+        </div>
+        
         <select id="citationStyle">
             <option value="harvard">Harvard Style</option>
             <option value="apa">APA Style</option>
@@ -94,12 +102,32 @@
         };
     
         Office.onReady((info) => {
-            if (info.host === Office.HostType.Word) {
-                document.getElementById("countButton").onclick = countWords;
-                const styleSelect = document.getElementById("citationStyle");
-                styleSelect.onchange = updateCitationExample;
-                updateCitationExample(); // Show initial example
-            }
+            // Check if we're in Word or on web
+            const isWord = info.host === Office.HostType.Word;
+            
+            // Show/hide appropriate interface
+            document.getElementById("webInput").style.display = isWord ? "none" : "block";
+            
+            // Add paste button handler
+            document.getElementById("pasteButton").onclick = async () => {
+                try {
+                    const text = await navigator.clipboard.readText();
+                    document.getElementById("textInput").value = text;
+                } catch (err) {
+                    console.error('Failed to read clipboard:', err);
+                    alert('Unable to paste. Please paste manually using Ctrl+V/Cmd+V');
+                }
+            };
+            
+            // Set up event listeners
+            document.getElementById("countButton").onclick = isWord ? countWordsInWord : countWordsInWeb;
+            const styleSelect = document.getElementById("citationStyle");
+            styleSelect.onchange = updateCitationExample;
+            updateCitationExample();
+        }).catch(() => {
+            // If Office.onReady fails, we're definitely on web
+            document.getElementById("webInput").style.display = "block";
+            document.getElementById("countButton").onclick = countWordsInWeb;
         });
     
         function updateCitationExample() {
@@ -108,7 +136,7 @@
                 citationPatterns[style].example;
         }
     
-        async function countWords() {
+        async function countWordsInWord() {
             try {
                 await Word.run(async (context) => {
                     // Get the complete document text
@@ -116,33 +144,38 @@
                     documentBody.load("text");
                     await context.sync();
     
-                    let text = documentBody.text;
-                    
-                    // Get selected citation style pattern
-                    const style = document.getElementById("citationStyle").value;
-                    const citationRegex = citationPatterns[style].pattern;
-                    
-                    // Find all citations
-                    const citations = text.match(citationRegex) || [];
-                    
-                    // Count words with citations
-                    const totalWordCount = countWordsInText(text);
-                    
-                    // Remove citations and count words
-                    const textWithoutCitations = text.replace(citationRegex, '');
-                    const wordCountExcludingCitations = countWordsInText(textWithoutCitations);
-    
-                    // Update the UI
-                    document.getElementById("totalCount").textContent = totalWordCount;
-                    document.getElementById("excludedCount").textContent = wordCountExcludingCitations;
-                    document.getElementById("citationCount").textContent = citations.length;
-    
-                    // Optional: Log found citations for debugging
-                    console.log('Found citations:', citations);
+                    // Process the text using shared function
+                    processText(documentBody.text);
                 });
             } catch (error) {
                 console.error('Error:', error);
             }
+        }
+    
+        function countWordsInWeb() {
+            const text = document.getElementById("textInput").value;
+            processText(text);
+        }
+    
+        // Shared function to process text counts and update UI
+        function processText(text) {
+            const style = document.getElementById("citationStyle").value;
+            const citationRegex = citationPatterns[style].pattern;
+            
+            // Find all citations
+            const citations = text.match(citationRegex) || [];
+            
+            // Count words with citations
+            const totalWordCount = countWordsInText(text);
+            
+            // Remove citations and count words
+            const textWithoutCitations = text.replace(citationRegex, '');
+            const wordCountExcludingCitations = countWordsInText(textWithoutCitations);
+    
+            // Update the UI
+            document.getElementById("totalCount").textContent = totalWordCount;
+            document.getElementById("excludedCount").textContent = wordCountExcludingCitations;
+            document.getElementById("citationCount").textContent = citations.length;
         }
     
         function countWordsInText(text) {
