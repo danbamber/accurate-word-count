@@ -1,4 +1,4 @@
-# Word Add-in for Citation-Aware Word Counting
+# Microsoft Word Add-in for Citation-Aware Word Counting
 
 ## Summary
 
