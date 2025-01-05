@@ -1,8 +1,8 @@
-# Word Add-in for Citation-Aware Word Counting
+# Microsoft Word Add-in for Citation-Aware Word Counting
 
 ## Summary
 
-Word Add-in that provides accurate word counts while intelligently handling academic citations. This tool supports multiple citation styles and helps authors get accurate word counts for academic writing.
+Microsoft Word Add-in that provides accurate word counts whilst ignoring the words of academic citations. This tool supports multiple citation styles and helps authors get accurate word counts for academic writing.
 
 ## Features
 
