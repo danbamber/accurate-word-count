@@ -1,4 +1,8 @@
-# Microsoft Word Add-in for Citation-Aware Word Counting
+# Accurate Word Count
+
+Count words in your document while automatically detecting and excluding citations.
+
+**Quick Access**: Try it online at [https://wordcount.doodan.com/taskpane.html](https://wordcount.doodan.com/taskpane.html)
 
 ## Summary
 
@@ -68,7 +72,7 @@ Microsoft Word Add-in that provides accurate word counts whilst ignoring the wor
    - Click "Install"
 
 **Direct Web Browser Usage:**
-- Visit [https://danbamber.github.io/citation-aware-word-count/taskpane.html](https://danbamber.github.io/citation-aware-word-count/taskpane.html)
+- Visit [https://wordcount.doodan.com/taskpane.html](https://wordcount.doodan.com/taskpane.html)
 - No installation required - simply paste your text and analyze citations directly in your browser
 - Perfect for quick checks or when Word installation isn't available
 
