@@ -32,7 +32,7 @@ Microsoft Word Add-in that provides accurate word counts whilst ignoring the wor
 ## Installation
 
 1. Download the latest release:
-   - Go to the [Releases](https://github.com/danbamber/accurate-word-count/releases) page
+   - Go to the [Releases](https://github.com/danbamber/citation-aware-word-count/releases) page
    - Download the latest version (.zip file)
    - Extract the files to your preferred location
 
@@ -68,7 +68,7 @@ Microsoft Word Add-in that provides accurate word counts whilst ignoring the wor
    - Click "Install"
 
 **Direct Web Browser Usage:**
-- Visit [https://danbamber.github.io/accurate-word-count/taskpane.html](https://danbamber.github.io/accurate-word-count/taskpane.html)
+- Visit [https://danbamber.github.io/citation-aware-word-count/taskpane.html](https://danbamber.github.io/citation-aware-word-count/taskpane.html)
 - No installation required - simply paste your text and analyze citations directly in your browser
 - Perfect for quick checks or when Word installation isn't available
 
