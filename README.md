@@ -1,4 +1,4 @@
-# Accurate Word Count
+# Microsoft Word Add-in for Citation-Aware Word Counting
 
 Count words in your document while automatically detecting and excluding citations.
 
