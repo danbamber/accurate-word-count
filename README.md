@@ -1,6 +1,8 @@
 # Microsoft Word Add-in for Citation-Aware Word Counting
 
-<img src="assets/icon-80.png" alt="Citation-Aware Word Count icon" width="80" height="80">
+<a href="https://wordcount.doodan.com/taskpane.html">
+    <img src="assets/icon-80.png" alt="Citation-Aware Word Count icon" width="80" height="80">
+</a>
 
 Count words in your document while automatically detecting and excluding citations.
 
